@@ -1,0 +1,179 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <groupId>com.leadingsoft.mtms</groupId>
+        <artifactId>business</artifactId>
+        <version>1.0.0.0-SNAPSHOT</version>
+    </parent>
+	<artifactId>ftqrs</artifactId>
+	<packaging>jar</packaging>
+	<name>(ftqrs)</name>
+	<description>(film ticket qr scan)</description>
+
+	<properties>
+		<profile.no-liquibase></profile.no-liquibase>
+		<profile.swagger></profile.swagger>
+		<start-class>cn.gov.sapprft.mtms.FtqrsDemoApplication</start-class>
+		<tomcat.version>7.0.69</tomcat.version>
+	</properties>
+
+	<dependencies>
+		<!-- bizfuse-web-common dependencies -->
+		<dependency>
+			<groupId>com.leadingsoft.bizfuse</groupId>
+			<artifactId>bizfuse-web-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.leadingsoft.bizfuse</groupId>
+			<artifactId>bizfuse-base-filestorage</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.leadingsoft.bizfuse</groupId>
+			<artifactId>bizfuse-model-common</artifactId>
+		</dependency>
+		<!-- bizfuse-quartz dependencies -->
+		<dependency>
+			<groupId>com.leadingsoft.bizfuse</groupId>
+			<artifactId>bizfuse-quartz</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hive</groupId>
+			<artifactId>hive-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-hadoop</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+			</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common -->
+		<dependency>
+		    <groupId>org.apache.hadoop</groupId>
+		    <artifactId>hadoop-common</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase-client</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-ribbon</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-configuration-processor</artifactId>
+        	<optional>true</optional>
+        </dependency>
+	</dependencies>
+	
+	<repositories>
+        <repository>
+            <id>spring-releases</id>
+            <name>Spring Releases</name>
+            <url>https://repo.spring.io/libs-release</url>
+        </repository>
+        
+    </repositories>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>/excel/**</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>/excel/**</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+	<profiles>
+		<profile>
+			<id>swagger</id>
+			<properties>
+				<profile.swagger>,swagger</profile.swagger>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- log configuration -->
+				<logback.loglevel>DEBUG</logback.loglevel>
+				<!-- default Spring profiles -->
+				<spring.profiles.active>dev${profile.swagger}</spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<!-- log configuration -->
+				<logback.loglevel>INFO</logback.loglevel>
+				<!-- default Spring profiles -->
+				<spring.profiles.active>prod${profile.swagger}</spring.profiles.active>
+			</properties>
+		</profile>
+	</profiles>
+
+</project>

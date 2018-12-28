@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.yx.springboot.demoSpring2.DemoSpring2ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.901 s - in com.yx.springboot.demoSpring2.DemoSpring2ApplicationTests

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.example.demoSpring5.DemoSpring5ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.488 s - in com.example.demoSpring5.DemoSpring5ApplicationTests

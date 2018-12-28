@@ -1,0 +1,21 @@
+{
+  "groups": [
+    {
+      "name": "hbase",
+      "type": "cn.gov.sapprft.mtms.external.hbase.config.HBaseProperties",
+      "sourceType": "cn.gov.sapprft.mtms.external.hbase.config.HBaseProperties"
+    },
+    {
+      "name": "hbase.client",
+      "type": "cn.gov.sapprft.mtms.external.hbase.config.HBaseProperties$Client",
+      "sourceType": "cn.gov.sapprft.mtms.external.hbase.config.HBaseProperties"
+    },
+    {
+      "name": "hbase.zookeeper",
+      "type": "cn.gov.sapprft.mtms.external.hbase.config.HBaseProperties$Zookeeper",
+      "sourceType": "cn.gov.sapprft.mtms.external.hbase.config.HBaseProperties"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
